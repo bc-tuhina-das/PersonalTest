@@ -15,10 +15,30 @@
         android:paddingEnd="20sp"
         android:paddingRight="20sp"
         android:paddingBottom="20sp"
-        android:text="Sorry, there was an issue with your login and we cannot retrieve your info"
+        android:text="Password here"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView1"
+        app:layout_constraintVertical_bias="0.138" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20sp"
+        android:paddingLeft="20sp"
+        android:paddingTop="20sp"
+        android:paddingEnd="20sp"
+        android:paddingRight="20sp"
+        android:paddingBottom="20sp"
+        android:text="Username here"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.445" />
 </androidx.constraintlayout.widget.ConstraintLayout>

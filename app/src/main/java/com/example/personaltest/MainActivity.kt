@@ -2,16 +2,17 @@ package com.example.personaltest
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
+import android.os.Message
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.textfield.TextInputEditText
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
+import java.util.Scanner
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,10 +53,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-//        inputBtn.setOnClickListener {
-//            val intent = Intent(this, NewActivity::class.java)
-//            startActivity(intent)
-//        }
 
     }
 }
