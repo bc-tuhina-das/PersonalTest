@@ -1,63 +1,57 @@
 package com.example.personaltest
 
 import android.os.Bundle
-import android.os.Message
 import android.util.Log
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import java.io.InputStream
-import java.net.HttpURLConnection
-import java.net.URL
-import java.util.Scanner
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 
 class NewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new)
+        //saving user and pass to make the request!
         val str1 = intent.getStringExtra("user")
         val str2 = intent.getStringExtra("pass")
-        //get tv variables
+
         var tV1 = findViewById<TextView>(R.id.textView1)
-        var tV2 = findViewById<TextView>(R.id.textView2)
-        APICall("https://apple.com/")
 
+        //TODO: break this down. read up on Volley's documentation?
+        val queue: RequestQueue by lazy {
+            Volley.newRequestQueue(this) // Replace 'this' with the context if needed
+        }
 
-        tV1.setText(str1)
-        tV2.setText(str2)
-        //Delete eventually
+        makeApiCall("https://friscoisdhacapi.vercel.app/api/info?username=${str1}&password=${str2}", queue, tV1)
+    }
 
+    //TODO: why didn't i need a coroutine? take this code and break it down completely via docs, a whiteboard etc
 
+    /*
+    * Initial issue: NetworkOnMainThreadException
+    */
+    fun makeApiCall(url: String, queue: RequestQueue, tV1:TextView) {
+        val jsonObjectRequest = JsonObjectRequest(
+            Request.Method.GET, url, null,
+            { response ->
+                //now we need to parse the response as a json object and chuck it out onto the screen
+                //get the keys and iterate through them, modifying the arr
+                val keys = response.keys()
+                var tvString = ""
+                for (key in keys){
+                    tvString += "\n" + key + ": " + response[key].toString()
+                }
+                tV1.setText(tvString)
+            },
+            { error ->
+                // Handle error here
+                error.printStackTrace()
+            }
+        )
+        queue.add(jsonObjectRequest)
     }
 
 
-    //TODO: Q: call in first activity or second?
-    //TODO: Q: is it better to use a thread or just a regular function?
-
-    fun APICall(inputurl:String){
-        //url to store the url for the https request
-        var url : URL? = null;
-        //strline will store each string being read
-        val strLine = ""
-        val stream: InputStream? = null
-        val scanner: Scanner? = null
-        var response = 0
-
-        /*TODO: better understand what a bundle is for. I can't seem to get it.*/
-        val bError = Bundle()
-        val errMsg = Message()
-
-        try{
-            url = URL(inputurl)
-            val connection = url.openConnection()
-            val HTTPconn = connection as HttpURLConnection
-            Log.i("Driver says: ", "This works")
-            response = HTTPconn.responseCode
-            Log.i("Driver says: ", ""+response)
-
-        }
-        catch (e: Exception){
-            Log.i("Driver says: ", "This is brocken 💔")
-        }
-    }
 }
