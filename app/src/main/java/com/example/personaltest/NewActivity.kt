@@ -41,7 +41,7 @@ class NewActivity : AppCompatActivity() {
                 val keys = response.keys()
                 var tvString = ""
                 for (key in keys){
-                    tvString += "\n" + key + ": " + response[key].toString()
+                    tvString += "\n" + key.toString().capitalize() + ": " + response[key].toString()
                 }
                 tV1.setText(tvString)
             },
